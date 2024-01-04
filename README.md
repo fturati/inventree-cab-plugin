@@ -32,7 +32,7 @@ docker compose up -d
 # Install plugin inside docker container
 docker ps 
 # Note the `NAME` or `CONTAINER ID` unique prefix for inventree-dev-server container
-docker exec -it inventree-dev-server-1 /bin/bash
+docker exec -it inventree-inventree-dev-server-1 /bin/sh
 # In shell inside docker
 source data/env/bin/activate
 # Copy plugin code to data/plugins/ folder on host (same folder is already mounted inside docker)

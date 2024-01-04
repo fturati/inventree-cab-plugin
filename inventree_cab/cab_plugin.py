@@ -177,7 +177,7 @@ class CabLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
 
         # Verify printer IP Address has been entered in settings
         if self.get_setting('IP_ADDRESS') == '':
-            raise Exception('IP Address of printer must be defined before printing.')
+            raise Exception('IP Address of printer must be defined in the plugin settings before printing.')
             
         outputs = []
         output_file = None
