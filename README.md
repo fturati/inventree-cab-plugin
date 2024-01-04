@@ -18,7 +18,7 @@ Or install manually with:
 pip install inventree-cab-plugin
 ```
 
-For further development can also setup an editable install (see InvenTree [documentation](https://docs.inventree.org/en/latest/extend/how_to_plugin/#local-plugin-development)).
+For further development, can also setup an editable install (see InvenTree [documentation](https://docs.inventree.org/en/latest/extend/how_to_plugin/#local-plugin-development)).
 
 An example using the InvenTree docker (see InvenTree [documentation](https://docs.inventree.org/en/latest/start/docker_dev/#docker-development-server)):
 
@@ -32,10 +32,9 @@ docker compose up -d
 # Install plugin inside docker container
 docker ps 
 # Note the `NAME` or `CONTAINER ID` unique prefix for inventree-dev-server container
-docker exec -it inventree-inventree-dev-server-1 /bin/sh
+docker exec -it inventree-dev-server-1 /bin/bash
 # In shell inside docker
 source data/env/bin/activate
-source /home/inventree/data/env/bin/activate
 # Copy plugin code to data/plugins/ folder on host (same folder is already mounted inside docker)
 cd ./data/plugins/inventree-cab-plugin
 pip install --editable .
@@ -43,7 +42,7 @@ pip install --editable .
 
 ## Configuration Options
 
-In InvenTree web GUI (in development environment accessible on http://localhost:8000), go to the settings page and then to the plugin settings section.
+In InvenTree Web GUI (In docker development environment accessible on http://localhost:8000), go to the settings page and then to the plugin settings section.
 If run InvenTree inside docker, should toggle the `Check plugins on startup` setting and restart (`docker compose restart`) if it was not enabled.
 
 Afterward can enable the Cab Labels plugin and access its settings.
@@ -52,11 +51,11 @@ The IP Address of the printer should be entered for the plugin to work. The othe
 ## Printing Options
 
 When select stock items to print labels for, can select a label template.
-On InvenTree administration page can upload new label template e.g., Stock Item Label (in dev environment at http://localhost:8000/admin/label/stockitemlabel/).
+On InvenTree administration page can upload new label template e.g., Stock Item Label (in dev. environment at http://localhost:8000/admin/label/stockitemlabel/).
 
-Here can click on `ADD STOCK ITEM LABEL`, give the label a name, select a file and configure the other desired parameters like the width and height then save.
+Here can click on `ADD STOCK ITEM LABEL`, give the label a name, select a file and configure the other desired parameters like the width and height, then save.
 
-An example jscript is shown below. Upload it to as html label file as described above. 
+An example jscript is shown below. Upload it as an html label template to inventree as described above.
 
 For other examples can refer to the Programming cab printer PDF that can be found online e.g. from cab [website](https://www.cab.de/media/pushfile.cfm?file=3963). There is also a jscript programming manual available from cab website.
 

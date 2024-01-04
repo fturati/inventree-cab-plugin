@@ -27,7 +27,7 @@ import io
 
 
 class PrintingOptionsSerializer(serializers.Serializer):
-    """Custom serializer class for BrotherLabelPlugin.
+    """Custom serializer class for CabLabelPlugin.
 
     Used to specify printing parameters at runtime
     """
@@ -45,9 +45,7 @@ class PrintingOptionsSerializer(serializers.Serializer):
 
 class CabLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
     """
-    A simple example plugin which provides support for a dummy printer.
-
-    A more complex plugin would communicate with an actual printer!
+    A plugin which provides support for cab printers.
     """
 
     AUTHOR = "Florian Turati"
@@ -121,10 +119,10 @@ class CabLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
     def _combine_image_vertically(self, preview_outputs):
         """Takes the PNG image preview for each labels and combines it into one bigger PNG image.
 
-        :param preview_outputs: _description_
-        :type preview_outputs: _type_
-        :return: A byte array of the image
-        :rtype: _type_
+        Arguments:
+            preview_outputs: The list of label preview PNG as bytes.
+        
+        Return: A byte array of the image
         """
         
         # NOTE: Omit some labels if preview is empty
@@ -250,8 +248,10 @@ class CabLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
         Send the label to the printer
 
         kwargs:
+            html_file: Raw HTML data of the label
             pdf_file: The PDF file object of the rendered label (WeasyTemplateResponse object)
             pdf_data: Raw PDF data of the rendered label
+            png_file: Raw PNG data of the rendered label
             filename: The filename of this PDF label
             label_instance: The instance of the label model which triggered the print_label() method
             item_instance: The instance of the database model against which the label is printed
@@ -259,12 +259,16 @@ class CabLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
             width: The expected width of the label (in mm)
             height: The expected height of the label (in mm)
             printing_options: The printing options set for this print job defined in the PrintingOptionsSerializer
+        
+        Returns: 
+            A preview of the label if the preview in printing_options is True.
         """
 
         # width = kwargs['width']
         # height = kwargs['height']
         # ^ currently this width and height are those of the label template (before conversion to PDF
-        # and PNG) and are of little use
+        # and PNG) and are of little use. 
+        # They can be used in the JScript template use to make the label.
 
         # Printing options requires a modern-ish InvenTree backend, which supports the 'printing_options' keyword argument
         options = kwargs.get('printing_options', {})

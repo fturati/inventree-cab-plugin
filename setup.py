@@ -33,7 +33,7 @@ setuptools.setup(
 
     install_requires=[
         'requests',
-        'PIL',
+        'Pillow', 
     ],
 
     setup_requires=[
@@ -41,7 +41,7 @@ setuptools.setup(
         "twine",
     ],
 
-    python_requires=">=3.9",
+    python_requires=">=3.9", # Python Requirements from InvenTree
 
     entry_points={
         "inventree_plugins": [
