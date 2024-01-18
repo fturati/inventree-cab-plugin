@@ -2,7 +2,7 @@
 
 A label printing plugin for [InvenTree](https://inventree.org/), which provides support for the [Cab label printers](https://www.cab.de/en/marking/label-printer/).
 
-Inspired by the [inventree-brother-plugin](https://github.com/inventree/inventree-brother-plugin)
+Inspired by the [inventree-brother-plugin](https://github.com/inventree/inventree-brother-plugin).
 
 This plugin supports printing to cab printers using FTP. It was only tested on the MACH 4S model but should work on other models with similar capabilities.
 

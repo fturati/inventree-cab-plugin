@@ -98,6 +98,8 @@ class CabPrinter:
 
         bmp_preview = r.content
 
+        # TODO check content is indeed a PNG file ?
+
         return bmp_preview
 
 
@@ -126,6 +128,8 @@ class CabPrinter:
         
         fp = io.BytesIO(jscript.encode('utf-8')) 
         printer_ftp.storbinary('STOR jscript.txt', fp)
+        # TODO is there a way to get potential error message displayed on printer screen ?
+        
         fp.close()
 
         printer_ftp.quit()

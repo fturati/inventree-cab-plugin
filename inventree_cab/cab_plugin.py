@@ -26,7 +26,7 @@ from PIL import Image
 import io
 
 
-class PrintingOptionsSerializer(serializers.Serializer):
+class CabLabelSerializer(serializers.Serializer):
     """Custom serializer class for CabLabelPlugin.
 
     Used to specify printing parameters at runtime
@@ -49,14 +49,14 @@ class CabLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
     """
 
     AUTHOR = "Florian Turati"
-    DESCRIPTION = "Label printing plugin for CAB printers"
+    DESCRIPTION = "Label printing plugin for Cab printers"
     VERSION = CAB_PLUGIN_VERSION
 
     NAME = "Cab Labels"
     SLUG = "cab"
     TITLE = "Cab Label Printer"
 
-    PrintingOptionsSerializer = PrintingOptionsSerializer
+    PrintingOptionsSerializer = CabLabelSerializer
 
     # Set BLOCKING_PRINT to false to return immediately (background printing)
     BLOCKING_PRINT = False # Constant, not used since change based on Preview toggle.
@@ -208,7 +208,7 @@ class CabLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
             }
 
             # Uses  as a variable instead of constant self.BLOCKING_PRINT
-            if printing_options['preview']:
+            if printing_options.get('preview', False): 
                 # Blocking print job
                 output_label = self.print_label(**print_args)
                 outputs.append(output_label)
@@ -219,7 +219,7 @@ class CabLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
                 self.offload_label(**print_args) 
                
             
-        if printing_options['preview']:
+        if printing_options.get('preview', False):
             # Display generated preview
             output_file = ContentFile(self._combine_image_vertically(outputs), 'labels.png')
             
@@ -268,7 +268,7 @@ class CabLabelPlugin(LabelPrintingMixin, SettingsMixin, InvenTreePlugin):
         # height = kwargs['height']
         # ^ currently this width and height are those of the label template (before conversion to PDF
         # and PNG) and are of little use. 
-        # They can be used in the JScript template use to make the label.
+        # They can be used in the JScript template used to make the label.
 
         # Printing options requires a modern-ish InvenTree backend, which supports the 'printing_options' keyword argument
         options = kwargs.get('printing_options', {})
