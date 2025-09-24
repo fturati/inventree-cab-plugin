@@ -48,4 +48,10 @@ setuptools.setup(
             "CabLabeLPlugin = inventree_cab.cab_plugin:CabLabelPlugin"
         ]
     },
+
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "Operating System :: OS Independent",
+        "Framework :: InvenTree",
+    ],
 )
